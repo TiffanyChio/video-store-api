@@ -4,6 +4,10 @@ describe Customer do
   describe "validations" do
     let(:customer){customers(:bob)}
     
+    it "can be valid" do
+      assert customer.valid?
+    end
+    
     it "must have a name" do
       customer.name = nil
       
