@@ -1,0 +1,8 @@
+bob:
+  name: Bob
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 123 abc street
+  city: Seattle
+  state: WA
+  postal_code: 12345
+  phone: (123) 456-7890
