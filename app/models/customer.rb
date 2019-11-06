@@ -8,9 +8,14 @@ class Customer < ApplicationRecord
   validates :phone, presence: true
   has_many :rentals
   has_many :movies, through: :rentals
-
+  
   def add_to_checked_out
     self.movies_checked_out_count += 1
+    self.save
+  end
+  
+  def remove_checked_out
+    self.movies_checked_out_count -= 1
     self.save
   end
 end

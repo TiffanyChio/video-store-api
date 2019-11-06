@@ -1,9 +1,9 @@
 class RentalsController < ApplicationController
-
+  
   def check_out
     customer = Customer.find_by(id: params[:customer_id])
     movie = Movie.find_by(id: params[:movie_id])
-
+    
     if movie && customer
       rental = Rental.new(customer_id: customer.id, movie_id: movie.id)
       rental.check_out_date = Date.today
@@ -11,7 +11,7 @@ class RentalsController < ApplicationController
       if rental.save
         movie.decrease_inventory
         customer.add_to_checked_out
-        render json: rental.as_json(only: [:id]), status: :ok
+        render json: rental.as_json(only: [:id, :due_date]), status: :ok
         return
       else
         render json: {
@@ -30,9 +30,37 @@ class RentalsController < ApplicationController
       return
     end
   end
-
+  
   def check_in
-
+    customer = Customer.find_by(id: params[:customer_id])
+    movie = Movie.find_by(id: params[:movie_id])
+    
+    if movie && customer
+      rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id)
+      rental.check_in_date = Date.today
+      
+      if rental.save
+        movie.increase_inventory
+        customer.remove_checked_out
+        render json: rental.as_json(only: [:id]), status: :ok
+        return
+      else
+        render json: {
+          ok: false,
+          errors: rental.errors.messages
+        }, 
+        status: :bad_request
+        return
+      end
+      
+    else
+      render json: {
+        ok: false,
+        errors: "Unable to check-in rental. Please check inputs."
+      },
+      status: :bad_request
+      return
+    end
   end
-
+  
 end
