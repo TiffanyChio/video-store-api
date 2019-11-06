@@ -1,9 +1,9 @@
 require "test_helper"
 
 describe Customer do
+  let(:customer){customers(:bob)}
+  
   describe "validations" do
-    let(:customer){customers(:bob)}
-    
     it "can be valid" do
       assert customer.valid?
     end
@@ -62,6 +62,20 @@ describe Customer do
       refute customer.valid?
       expect(customer.errors.messages).must_include :phone
       expect(customer.errors.messages[:phone]).must_include "can't be blank"
+    end
+  end
+  
+  describe "custom methods" do
+    describe "add_to_checked_out" do
+      it "will increase movies_checked_out_count by one" do
+        expect{ customer.add_to_checked_out }.must_differ "customer.movies_checked_out_count", 1
+      end
+    end
+    
+    describe "remove_checked_out" do
+      it "will decrease movies_checked_out_count by one" do
+        expect{ customer.remove_checked_out }.must_differ "customer.movies_checked_out_count", -1
+      end
     end
   end
 end
