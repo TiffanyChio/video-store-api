@@ -6,3 +6,22 @@ bob:
   state: WA
   postal_code: 12345
   phone: (123) 456-7890
+  movies_checked_out_count: 0
+hannah:
+  name: Hannah
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 456 def street
+  city: Seattle
+  state: WA
+  postal_code: 22222
+  phone: (123) 456-1234
+  movies_checked_out_count: 0
+mochi:
+  name: Mochi Cat
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 0

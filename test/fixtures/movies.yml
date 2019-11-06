@@ -3,3 +3,16 @@ one:
   overview: very interesting movie
   release_date: 2019-11-05
   inventory: 4
+  available_inventory: 4
+two:
+  title: a second movie
+  overview: less interesting movie
+  release_date: 2019-10-03
+  inventory: 2
+  available_inventory: 2
+three:
+  title: Titanic
+  overview: Romance on a sinking ship
+  release_date: 1998-02-15
+  inventory: 10
+  available_inventory: 10
