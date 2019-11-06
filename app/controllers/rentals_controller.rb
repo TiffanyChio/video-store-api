@@ -37,18 +37,28 @@ class RentalsController < ApplicationController
     
     if movie && customer
       rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id)
-      rental.check_in_date = Date.today
       
-      if rental.save
-        movie.increase_inventory
-        customer.remove_checked_out
-        render json: rental.as_json(only: [:id]), status: :ok
-        return
+      if rental
+        rental.check_in_date = Date.today
+        
+        if rental.save
+          movie.increase_inventory
+          customer.remove_checked_out
+          render json: rental.as_json(only: [:id]), status: :ok
+          return
+        else
+          render json: {
+            ok: false,
+            errors: rental.errors.messages
+          }, 
+          status: :bad_request
+          return
+        end
       else
         render json: {
           ok: false,
-          errors: rental.errors.messages
-        }, 
+          errors: "Unable to check-in rental. Could not find rental record."
+        },
         status: :bad_request
         return
       end
