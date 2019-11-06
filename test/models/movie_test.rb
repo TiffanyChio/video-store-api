@@ -1,8 +1,9 @@
 require "test_helper"
 
 describe Movie do
+  let(:movie){movies(:one)}
   describe "validations" do
-    let(:movie){movies(:one)}
+    
     
     it "can be valid" do
       assert movie.valid?
@@ -34,6 +35,22 @@ describe Movie do
       refute movie.valid?
       expect(movie.errors.messages).must_include :inventory
       expect(movie.errors.messages[:inventory]).must_include "can't be blank"
+    end
+  end
+
+  describe "decrease_inventory" do
+    it "will decrease a movie's available inventory by 1" do
+      before = movie.available_inventory
+      movie.decrease_inventory
+      expect(movie.available_inventory).must_equal before - 1
+    end
+  end
+
+  describe "increase_inventory" do
+    it "will increase a movie's available inventory by 1" do
+      before = movie.available_inventory
+      movie.increase_inventory
+      expect(movie.available_inventory).must_equal before + 1
     end
   end
 end
