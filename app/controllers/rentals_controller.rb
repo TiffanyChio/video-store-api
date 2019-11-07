@@ -4,6 +4,10 @@ class RentalsController < ApplicationController
     customer = Customer.find_by(id: params[:customer_id])
     movie = Movie.find_by(id: params[:movie_id])
     
+    if movie
+      movie = movie.in_stock
+    end
+    
     if movie && customer
       rental = Rental.new(customer_id: customer.id, movie_id: movie.id)
       rental.check_out_date = Date.today
@@ -36,7 +40,7 @@ class RentalsController < ApplicationController
     movie = Movie.find_by(id: params[:movie_id])
     
     if movie && customer
-      rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id)
+      rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id, check_in_date: nil)
       
       if rental
         rental.check_in_date = Date.today

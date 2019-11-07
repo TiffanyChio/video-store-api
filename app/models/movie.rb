@@ -15,4 +15,12 @@ class Movie < ApplicationRecord
     self.available_inventory += 1
     self.save
   end
+  
+  def in_stock
+    if self.available_inventory == 0
+      return nil
+    end
+    
+    return self
+  end
 end

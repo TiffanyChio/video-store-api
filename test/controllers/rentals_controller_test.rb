@@ -29,6 +29,15 @@ describe RentalsController do
       expect(updated_movie.available_inventory).must_equal before_movie_count - 1
       expect(updated_cust.movies_checked_out_count).must_equal before_cust_count + 1
     end
+    
+    it "returns bad request if the movie is not in stock" do
+      movie = movies(:one)
+      movie.available_inventory = 0
+      movie.save!
+      
+      expect{ post check_out_path, params: rental_params}.wont_change "Rental.count"
+      check_response(expected_type: Hash, expected_status: :bad_request)
+    end
   end
   
   describe "check_in" do
@@ -62,6 +71,28 @@ describe RentalsController do
       
       expect(updated_movie.available_inventory).must_equal before_movie_count + 1
       expect(updated_cust.movies_checked_out_count).must_equal before_cust_count - 1
+    end
+    
+    it "finds the correct rental if more than one exists for the same movie/customer combination" do
+      post check_out_path, params: rental_params
+      post check_in_path, params: rental_params
+      
+      post check_out_path, params: rental_params
+      current_rental = Rental.last
+      expect(current_rental.check_in_date).must_be_nil
+      
+      post check_in_path, params: rental_params
+      
+      updated_rental = Rental.find_by(id: current_rental.id)
+      expect(updated_rental.check_in_date).must_equal Date.today
+    end
+    
+    it "returns bad request when checking in an already check-ed in movie" do
+      post check_out_path, params: rental_params
+      post check_in_path, params: rental_params
+      
+      post check_in_path, params: rental_params
+      check_response(expected_type: Hash, expected_status: :bad_request)
     end
   end
 end

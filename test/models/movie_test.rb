@@ -37,7 +37,7 @@ describe Movie do
       expect(movie.errors.messages[:inventory]).must_include "can't be blank"
     end
   end
-
+  
   describe "decrease_inventory" do
     it "will decrease a movie's available inventory by 1" do
       before = movie.available_inventory
@@ -45,12 +45,31 @@ describe Movie do
       expect(movie.available_inventory).must_equal before - 1
     end
   end
-
+  
   describe "increase_inventory" do
     it "will increase a movie's available inventory by 1" do
       before = movie.available_inventory
       movie.increase_inventory
       expect(movie.available_inventory).must_equal before + 1
+    end
+  end
+  
+  describe "in_stock" do
+    it "returns the Movie object when available inventory is not zero" do
+      movie = movies(:two)
+      
+      expect(movie.in_stock).must_be_kind_of Movie
+      expect(movie.title).must_equal "a second movie"
+    end
+    
+    it "returns nil when there is no available inventory" do
+      movie = movies(:two)
+      movie.available_inventory = 0
+      movie.save!
+      
+      expect(movie.available_inventory).must_equal 0
+      
+      expect(movie.in_stock).must_be_nil
     end
   end
 end
