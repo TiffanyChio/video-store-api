@@ -1,0 +1,21 @@
+rental1:
+  movie: one
+  customer: mochi
+  check_out_date: 2019-09-01
+  due_date: 2019-09-08
+  check_in_date: nil
+
+rental2:
+  movie: one
+  customer: mochi
+  check_out_date: 2019-09-01
+  due_date: 2019-09-08
+  check_in_date: nil
+
+rental3:
+  movie: one
+  customer: mochi
+  check_out_date: 2019-09-01
+  due_date: 2019-09-08
+  check_in_date: 2019-10-11
+

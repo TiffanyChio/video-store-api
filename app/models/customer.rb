@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
   validates :state, presence: true
   validates :postal_code, presence: true
   validates :phone, presence: true
-  has_many :rentals
+  has_many :rentals, dependent: :nullify
   has_many :movies, through: :rentals
   
   def add_to_checked_out

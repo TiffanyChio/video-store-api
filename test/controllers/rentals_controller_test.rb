@@ -95,4 +95,14 @@ describe RentalsController do
       check_response(expected_type: Hash, expected_status: :bad_request)
     end
   end
+
+  describe "overdue" do
+    it "returns all rentals that have due dates that have passed" do
+      get overdue_path
+
+      check_response(expected_type: Hash, expected_status: :ok)
+      
+    end
+
+  end
 end

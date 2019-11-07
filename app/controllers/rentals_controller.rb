@@ -76,5 +76,10 @@ class RentalsController < ApplicationController
       return
     end
   end
+
+  def overdue
+    overdue_rentals = Rental.where(check_in_date: nil).where("due_date < ?", Date.today)
+    render json: overdue_rentals, status: :ok
+  end
   
 end

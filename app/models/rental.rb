@@ -3,4 +3,6 @@ class Rental < ApplicationRecord
   validates :due_date, presence: true
   belongs_to :movie
   belongs_to :customer
+
+  
 end

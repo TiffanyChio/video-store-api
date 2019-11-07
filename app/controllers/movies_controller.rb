@@ -30,6 +30,14 @@ class MoviesController < ApplicationController
       return
     end
   end
+
+  def current
+
+  end
+
+  def history
+
+  end
   
   private
   

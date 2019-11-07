@@ -3,7 +3,7 @@ class Movie < ApplicationRecord
   validates :overview, presence: true
   validates :release_date, presence: true
   validates :inventory, presence: true
-  has_many :rentals
+  has_many :rentals, dependent: :nullify
   has_many :customers, through: :rentals
   
   def decrease_inventory
