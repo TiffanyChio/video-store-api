@@ -100,9 +100,20 @@ describe RentalsController do
     it "returns all rentals that have due dates that have passed" do
       get overdue_path
 
-      check_response(expected_type: Hash, expected_status: :ok)
+      check_response(expected_type: Array)
       
+      body = JSON.parse(response.body)
+      
+      body.each do |rental|
+        expect(rental).must_be_instance_of Hash
+        expect(rental.keys.sort).must_equal ["check_in_date", "check_out_date", "customer_id", "due_date", "id", "movie_id"]
+      end
     end
 
+    it "returns 'no overdue movies' if none are overdue" do
+      Rental.destroy_all
+      get overdue_path
+      check_response(expected_type: Hash, expected_status: :ok)
+    end
   end
 end

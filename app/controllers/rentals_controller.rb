@@ -78,8 +78,13 @@ class RentalsController < ApplicationController
   end
 
   def overdue
-    overdue_rentals = Rental.where(check_in_date: nil).where("due_date < ?", Date.today)
-    render json: overdue_rentals, status: :ok
+    overdue_rentals = Rental.where(check_in_date: nil).where("due_date < ?", Date.today).as_json(only: [:id, :check_in_date, :check_out_date, :due_date, :movie_id, :customer_id])
+    if overdue_rentals.empty?
+      render json: { errors: "No overdue movies at this time" }, status: :ok
+      return
+    else
+      render json: overdue_rentals, status: :ok
+    end
   end
   
 end
