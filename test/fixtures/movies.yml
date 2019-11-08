@@ -16,3 +16,15 @@ three:
   release_date: 1998-02-15
   inventory: 10
   available_inventory: 10
+star_wars:
+  title: Star Wars
+  overview: Hero story and western set in space.
+  release_date: 1998-04-19
+  inventory: 5
+  available_inventory: 2
+unpopular:
+  title: Unpopular Movie
+  overview: No one wants to rent this movie.
+  release_date: 1998-04-19
+  inventory: 1
+  available_inventory: 1

@@ -23,4 +23,36 @@ class Movie < ApplicationRecord
     
     return self
   end
+  
+  def find_curr_rentals
+    current_rentals = self.rentals.select { |rental| rental.check_in_date == nil }
+    
+    curr_customer_info = current_rentals.map { |rental| 
+      {
+        customer_id: rental.customer.id,
+        name: rental.customer.name,
+        postal_code: rental.customer.postal_code,
+        check_out_date: rental.check_out_date,
+        due_date: rental.due_date
+      }
+    }
+    
+    return curr_customer_info
+  end
+  
+  def find_past_rentals
+    past_rentals = self.rentals.select { |rental| rental.check_in_date != nil }
+    
+    past_customer_info = past_rentals.map { |rental| 
+      {
+        customer_id: rental.customer.id,
+        name: rental.customer.name,
+        postal_code: rental.customer.postal_code,
+        check_out_date: rental.check_out_date,
+        due_date: rental.due_date
+      }
+    }
+    
+    return past_customer_info
+  end
 end
