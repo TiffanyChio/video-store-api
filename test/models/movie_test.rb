@@ -74,68 +74,45 @@ describe Movie do
       end
     end
     
-    describe "find_curr_rentals" do
-      CURR_RENT_FIELDS = [:check_out_date, :customer_id, :due_date, :name, :postal_code]
+    describe "find_rentals" do
+      RENTAL_FIELDS = [:check_out_date, :customer_id, :due_date, :name, :postal_code]
       
-      it "returns an array of customers who have currently checked out a movie" do
+      it "returns an array of rental info of currently checked-outmovie" do
         movie = movies(:star_wars)
-        current_rentals = movie.find_curr_rentals
+        current_rentals = movie.find_rentals("current")
         
         expect(current_rentals).must_be_kind_of Array
         expect(current_rentals.length).must_equal 3
         expect(current_rentals.first).must_be_kind_of Hash
-        expect(current_rentals.first.keys.sort).must_equal CURR_RENT_FIELDS
+        expect(current_rentals.first.keys.sort).must_equal RENTAL_FIELDS
       end
       
       it "returns an empty array if no copies of a movie are currently checked out" do
         movie = movies(:unpopular)
-        current_customers = movie.find_curr_rentals
-        
-        expect(current_customers).must_be_kind_of Array
-        expect(current_customers.length).must_equal 0
-      end
-    end
-    
-    RENTAL_FIELDS = [:check_out_date, :customer_id, :due_date, :name, :postal_code]
-    
-    describe "find_curr_rentals" do
-      it "returns an array of customers who have currently checked out a movie" do
-        movie = movies(:star_wars)
-        current_rentals = movie.find_curr_rentals
+        current_rentals = movie.find_rentals("current")
         
         expect(current_rentals).must_be_kind_of Array
-        expect(current_rentals.length).must_equal 3
-        expect(current_rentals.first).must_be_kind_of Hash
-        expect(current_rentals.first.keys.sort).must_equal CURR_RENT_FIELDS
+        expect(current_rentals.length).must_equal 0
       end
       
-      it "returns an empty array if no copies of a movie are currently checked out" do
-        movie = movies(:unpopular)
-        current_customers = movie.find_curr_rentals
+      it "returns an array of rental info of movie check-out in the past" do
+        movie = movies(:star_wars)
+        current_rentals = movie.find_rentals("past")
         
-        expect(current_customers).must_be_kind_of Array
-        expect(current_customers.length).must_equal 0
+        expect(current_rentals).must_be_kind_of Array
+        expect(current_rentals.length).must_equal 2
+        expect(current_rentals.first).must_be_kind_of Hash
+        expect(current_rentals.first.keys.sort).must_equal RENTAL_FIELDS
+      end
+      
+      it "returns an empty array if a movie has never been checked out" do
+        movie = movies(:unpopular)
+        current_rentals = movie.find_rentals("past")
+        
+        expect(current_rentals).must_be_kind_of Array
+        expect(current_rentals.length).must_equal 0
       end
     end
     
-    describe "find_past_rentals" do
-      it "returns an array of customers who have currently checked out a movie" do
-        movie = movies(:star_wars)
-        current_rentals = movie.find_curr_rentals
-        
-        expect(current_rentals).must_be_kind_of Array
-        expect(current_rentals.length).must_equal 3
-        expect(current_rentals.first).must_be_kind_of Hash
-        expect(current_rentals.first.keys.sort).must_equal CURR_RENT_FIELDS
-      end
-      
-      it "returns an empty array if no copies of a movie are currently checked out" do
-        movie = movies(:unpopular)
-        current_customers = movie.find_curr_rentals
-        
-        expect(current_customers).must_be_kind_of Array
-        expect(current_customers.length).must_equal 0
-      end
-    end
   end
 end
