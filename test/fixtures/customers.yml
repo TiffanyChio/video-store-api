@@ -25,3 +25,48 @@ mochi:
   postal_code: 11111
   phone: (123) 123-4567
   movies_checked_out_count: 0
+uno:
+  name: Uno
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 1
+dos:
+  name: Dos
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 0
+tres:
+  name: Tres
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 1
+cuatro:
+  name: Cuatro
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 0
+cinco:
+  name: Cinco
+  registered_at: 	Wed, 29 Apr 2015 07:54:14 -0700
+  address: 314 home street
+  city: Austin
+  state: TX
+  postal_code: 11111
+  phone: (123) 123-4567
+  movies_checked_out_count: 1

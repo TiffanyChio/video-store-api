@@ -19,3 +19,33 @@ rental3:
   due_date: 2019-09-08
   check_in_date: 2019-10-11
 
+rental_sw1:
+  movie: star_wars
+  customer: uno
+  check_out_date: 2019-09-01
+  due_date: 2019-09-08
+  check_in_date: nil
+rental_sw2:
+  movie: star_wars
+  customer: dos
+  check_out_date: 2019-09-01
+  due_date: 2019-09-08
+  check_in_date: 2019-09-08
+rental_sw3:
+  movie: star_wars
+  customer: tres
+  check_out_date: 2019-11-07
+  due_date: 2019-11-14
+  check_in_date: nil
+rental_sw4:
+  movie: star_wars
+  customer: cuatro
+  check_out_date: 2019-04-01
+  due_date: 2019-04-08
+  check_in_date: 2019-04-08
+rental_sw5:
+  movie: star_wars
+  customer: cinco
+  check_out_date: 2019-11-06
+  due_date: 2019-11-13
+  check_in_date: nil

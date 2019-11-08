@@ -90,4 +90,78 @@ describe MoviesController do
       expect(body["errors"].keys).must_include "title"
     end
   end
+  
+  describe "current" do
+    it "responds with JSON, success, and an array of custom rental hashes" do
+      movie = movies(:star_wars)
+      get current_movie_path(id: movie.id)
+      
+      check_response(expected_type: Array)
+      
+      body = JSON.parse(response.body)
+      
+      body.each do |rental|
+        expect(rental).must_be_instance_of Hash
+        expect(rental.keys.sort).must_equal ["check_out_date", "customer_id", "due_date", "name", "postal_code"]
+      end
+    end
+    
+    it "responds with JSON, success, and an empty array for a movie with no current check-outs" do
+      movie = movies(:unpopular)
+      get current_movie_path(id: movie.id)
+      
+      check_response(expected_type: Array)
+      
+      body = JSON.parse(response.body)
+      
+      expect(body).must_equal []
+    end
+    
+    it "responds with JSON and not found for an invalid ID" do
+      get current_movie_path(id: -1)
+      
+      check_response(expected_type: Hash, expected_status: :not_found)
+      
+      body = JSON.parse(response.body)
+      
+      expect(body["errors"]).must_include "No movie assossiated with ID -1."
+    end
+  end
+  
+  describe "history" do  
+    it "responds with JSON, success, and an array of custom rental hashes" do
+      movie = movies(:star_wars)
+      get current_movie_path(id: movie.id)
+      
+      check_response(expected_type: Array)
+      
+      body = JSON.parse(response.body)
+      
+      body.each do |rental|
+        expect(rental).must_be_instance_of Hash
+        expect(rental.keys.sort).must_equal ["check_out_date", "customer_id", "due_date", "name", "postal_code"]
+      end
+    end
+    
+    it "responds with JSON, success, and an empty array for a movie with no past check-outs" do
+      movie = movies(:unpopular)
+      get current_movie_path(id: movie.id)
+      
+      check_response(expected_type: Array)
+      
+      body = JSON.parse(response.body)
+      
+      expect(body).must_equal []
+    end
+    
+    it "responds with JSON and not found for an invalid ID" do
+      get current_movie_path(id: -1)
+      
+      check_response(expected_type: Hash, expected_status: :not_found)
+      
+      body = JSON.parse(response.body)
+      
+      expect(body["errors"]).must_include "No movie assossiated with ID -1."
+    end
+  end
 end

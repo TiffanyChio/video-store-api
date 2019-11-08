@@ -30,13 +30,41 @@ class MoviesController < ApplicationController
       return
     end
   end
-
+  
   def current
-
+    movie = Movie.find_by(id: params[:id])
+    
+    if movie.nil?
+      render json: {
+        ok: false,
+        errors: "No movie assossiated with ID #{params[:id]}."
+      }, 
+      status: :not_found
+      return
+    end
+    
+    current_rentals = movie.find_rentals("current").as_json
+    
+    render json: current_rentals, status: :ok
+    return
   end
-
+  
   def history
-
+    movie = Movie.find_by(id: params[:id])
+    
+    if movie.nil?
+      render json: {
+        ok: false,
+        errors: "No movie assossiated with ID #{params[:id]}."
+      }, 
+      status: :not_found
+      return
+    end
+    
+    past_rentals = movie.find_rentals("past").as_json
+    
+    render json: past_rentals, status: :ok
+    return
   end
   
   private
