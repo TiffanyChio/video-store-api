@@ -6,6 +6,4 @@ Rails.application.routes.draw do
   get "/rentals/overdue", to: "rentals#overdue", as: "overdue"
   get "/movies/:id/current", to: "movies#current", as: "current_movie"
   get "/movies/:id/history", to: "movies#history", as: "movie_history"
-  get "/customers/:id/current", to: "customers#current", as: "current_cust"
-  get "/customers/:id/history", to: "customers#history", as: "cust_history"
 end
