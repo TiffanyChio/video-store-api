@@ -91,8 +91,6 @@ describe MoviesController do
     end
   end
   
-  RENTAL_FIELDS = ["check_out_date", "customer_id", "due_date", "name", "postal_code"]
-  
   describe "current" do
     it "responds with JSON, success, and an array of custom rental hashes" do
       movie = movies(:star_wars)
@@ -104,7 +102,7 @@ describe MoviesController do
       
       body.each do |rental|
         expect(rental).must_be_instance_of Hash
-        expect(rental.keys.sort).must_equal RENTAL_FIELDS
+        expect(rental.keys.sort).must_equal ["check_out_date", "customer_id", "due_date", "name", "postal_code"]
       end
     end
     
@@ -141,7 +139,7 @@ describe MoviesController do
       
       body.each do |rental|
         expect(rental).must_be_instance_of Hash
-        expect(rental.keys.sort).must_equal RENTAL_FIELDS
+        expect(rental.keys.sort).must_equal ["check_out_date", "customer_id", "due_date", "name", "postal_code"]
       end
     end
     
