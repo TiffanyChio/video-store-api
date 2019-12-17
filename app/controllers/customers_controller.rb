@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   end
 
   def current
-
+    
   end
 
   def history
